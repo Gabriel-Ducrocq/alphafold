@@ -730,6 +730,8 @@ def _process_single_hit(
       query_sequence)
   print("Mapping:")
   print(mapping)
+  print("global query sequence")
+  print(query_sequence)
   print("\n\n\n\n")
 
   # The mapping is from the query to the actual hit sequence, so we need to
