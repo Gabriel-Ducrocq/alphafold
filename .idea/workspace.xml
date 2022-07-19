@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="42bd1659-7ad0-4ef2-aeb5-ee5340acb692" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/alphafold/data/pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphafold/data/pipeline.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alphafold/data/templates.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphafold/data/templates.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run_alphafold_template.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_alphafold_template.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run_alphafold.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_alphafold.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,20 +12,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/run_alphafold.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="509">
-              <caret line="422" lean-forward="true" selection-start-line="422" selection-end-line="422" />
+            <state relative-caret-position="229">
+              <caret line="179" column="23" selection-start-line="179" selection-start-column="23" selection-end-line="179" selection-end-column="23" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/run_alphafold_template.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-550">
-              <caret line="373" column="65" selection-start-line="373" selection-start-column="65" selection-end-line="373" selection-end-column="65" />
+            <state relative-caret-position="-3894">
+              <caret line="92" column="63" lean-forward="true" selection-start-line="92" selection-start-column="63" selection-end-line="92" selection-end-column="63" />
               <folding>
                 <element signature="e#653#664#0" expanded="true" />
               </folding>
@@ -69,12 +67,13 @@
     <findStrings>
       <find>_process_</find>
       <find>_process_custom_templat</find>
-      <find>template_mmcif_</find>
       <find>mapping</find>
       <find>logging.log</find>
       <find>TEMPLATE_FEATURES</find>
       <find>_process_cus</find>
       <find>raise</find>
+      <find>template_mmcif_</find>
+      <find>template_mmcif_dir</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -86,6 +85,7 @@
         <option value="$PROJECT_DIR$/alphafold/data/templates.py" />
         <option value="$PROJECT_DIR$/alphafold/data/pipeline.py" />
         <option value="$PROJECT_DIR$/run_alphafold_template.py" />
+        <option value="$PROJECT_DIR$/run_alphafold.py" />
       </list>
     </option>
   </component>
@@ -178,13 +178,6 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/run_alphafold.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="509">
-          <caret line="422" lean-forward="true" selection-start-line="422" selection-end-line="422" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/alphafold/data/templates.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="597">
@@ -204,11 +197,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/run_alphafold_template.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-550">
-          <caret line="373" column="65" selection-start-line="373" selection-start-column="65" selection-end-line="373" selection-end-column="65" />
+        <state relative-caret-position="-3894">
+          <caret line="92" column="63" lean-forward="true" selection-start-line="92" selection-start-column="63" selection-end-line="92" selection-end-column="63" />
           <folding>
             <element signature="e#653#664#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run_alphafold.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="179" column="23" selection-start-line="179" selection-start-column="23" selection-end-line="179" selection-end-column="23" />
         </state>
       </provider>
     </entry>

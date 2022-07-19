@@ -175,6 +175,9 @@ def predict_structure(
   timings['features'] = time.time() - t_0
 
   # Write out features as a pickled dictionary.
+  print("Printing features dict !")
+  print(feature_dict)
+  print("\n\n\n\n\n\n\n")
   features_output_path = os.path.join(output_dir, 'features.pkl')
   with open(features_output_path, 'wb') as f:
     pickle.dump(feature_dict, f, protocol=4)
