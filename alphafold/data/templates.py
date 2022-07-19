@@ -790,6 +790,114 @@ def _process_single_hit(
     return SingleHitResult(features=None, error=error, warning=None)
 
 
+
+def _process_custom_template(
+    query_sequence: str,
+    hit: parsers.TemplateHit,
+    mmcif_dir: str,
+    max_template_date: datetime.datetime,
+    kalign_binary_path: str,
+    strict_error_check: bool = False) -> SingleHitResult:
+  """Tries to extract template features from a single HHSearch hit."""
+  # Fail hard if we can't get the PDB ID and chain name from the hit.
+  #hit_pdb_code, hit_chain_id = _get_pdb_id_and_chain(hit)
+
+  # This hit has been removed (obsoleted) from PDB, skip it.
+  #if hit_pdb_code in obsolete_pdbs and obsolete_pdbs[hit_pdb_code] is None:
+  #  return SingleHitResult(
+  #      features=None, error=None, warning=f'Hit {hit_pdb_code} is obsolete.')
+
+  #if hit_pdb_code not in release_dates:
+  #  if hit_pdb_code in obsolete_pdbs:
+  #    hit_pdb_code = obsolete_pdbs[hit_pdb_code]
+
+  # Pass hit_pdb_code since it might have changed due to the pdb being obsolete.
+  #try:
+  #  _assess_hhsearch_hit(
+  #      hit=hit,
+  #      hit_pdb_code=hit_pdb_code,
+  #      query_sequence=query_sequence,
+  #      release_dates=release_dates,
+  #      release_date_cutoff=max_template_date)
+  #except PrefilterError as e:
+  #  msg = f'hit {hit_pdb_code}_{hit_chain_id} did not pass prefilter: {str(e)}'
+  #  logging.info(msg)
+  #  if strict_error_check and isinstance(e, (DateError, DuplicateError)):
+  #    # In strict mode we treat some prefilter cases as errors.
+  #    return SingleHitResult(features=None, error=msg, warning=None)
+
+  #  return SingleHitResult(features=None, error=None, warning=None)
+
+  #mapping = _build_query_to_hit_index_mapping(
+  #    hit.query, hit.hit_sequence, hit.indices_hit, hit.indices_query,
+  #    query_sequence)
+
+  # The mapping is from the query to the actual hit sequence, so we need to
+  # remove gaps (which regardless have a missing confidence score).
+  #template_sequence = hit.hit_sequence.replace('-', '')
+
+  hit_pdb_code = "custom_template"
+  mmcif_file_name = os.listdir(mmcif_dir)[0]
+  cif_path = os.path.join(mmcif_dir, mmcif_file_name)
+  #logging.debug('Reading PDB entry from %s. Query: %s, template: %s', cif_path,
+  #              query_sequence, template_sequence)
+  # Fail if we can't find the mmCIF file.
+  cif_string = _read_file(cif_path)
+
+  parsing_result = mmcif_parsing.parse(
+      file_id=hit_pdb_code, mmcif_string=cif_string)
+
+  if parsing_result.mmcif_object is not None:
+    hit_release_date = datetime.datetime.strptime(
+        parsing_result.mmcif_object.header['release_date'], '%Y-%m-%d')
+    if hit_release_date > max_template_date:
+      error = ('Template %s date (%s) > max template date (%s).' %
+               (hit_pdb_code, hit_release_date, max_template_date))
+      if strict_error_check:
+        return SingleHitResult(features=None, error=error, warning=None)
+      else:
+        logging.debug(error)
+        return SingleHitResult(features=None, error=None, warning=None)
+
+  try:
+    features, realign_warning = _extract_template_features(
+        mmcif_object=parsing_result.mmcif_object,
+        pdb_id=hit_pdb_code,
+        mapping=mapping,
+        template_sequence=template_sequence,
+        query_sequence=query_sequence,
+        template_chain_id=hit_chain_id,
+        kalign_binary_path=kalign_binary_path)
+    if hit.sum_probs is None:
+      features['template_sum_probs'] = [0]
+    else:
+      features['template_sum_probs'] = [hit.sum_probs]
+
+    # It is possible there were some errors when parsing the other chains in the
+    # mmCIF file, but the template features for the chain we want were still
+    # computed. In such case the mmCIF parsing errors are not relevant.
+    return SingleHitResult(
+        features=features, error=None, warning=realign_warning)
+  except (NoChainsError, NoAtomDataInTemplateError,
+          TemplateAtomMaskAllZerosError) as e:
+    # These 3 errors indicate missing mmCIF experimental data rather than a
+    # problem with the template search, so turn them into warnings.
+    warning = ('%s_%s (sum_probs: %s, rank: %s): feature extracting errors: '
+               '%s, mmCIF parsing errors: %s'
+               % (hit_pdb_code, hit_chain_id, hit.sum_probs, hit.index,
+                  str(e), parsing_result.errors))
+    if strict_error_check:
+      return SingleHitResult(features=None, error=warning, warning=None)
+    else:
+      return SingleHitResult(features=None, error=None, warning=warning)
+  except Error as e:
+    error = ('%s_%s (sum_probs: %.2f, rank: %d): feature extracting errors: '
+             '%s, mmCIF parsing errors: %s'
+             % (hit_pdb_code, hit_chain_id, hit.sum_probs, hit.index,
+                str(e), parsing_result.errors))
+    return SingleHitResult(features=None, error=error, warning=None)
+
+
 @dataclasses.dataclass(frozen=True)
 class TemplateSearchResult:
   features: Mapping[str, Any]
@@ -1008,3 +1116,78 @@ class HmmsearchHitFeaturizer(TemplateHitFeaturizer):
       }
     return TemplateSearchResult(
         features=template_features, errors=errors, warnings=warnings)
+
+
+class CustomTemplateFeaturizer(TemplateHitFeaturizer):
+    """An abstract base class for turning custom template to template features."""
+
+    def __init__(
+            self,
+            mmcif_dir: str,
+            max_template_date: str,
+            max_hits: int,
+            kalign_binary_path: str,
+            release_dates_path: Optional[str],
+            obsolete_pdbs_path: Optional[str],
+            strict_error_check: bool = False):
+        super().__init__(mmcif_dir,
+            max_template_date,
+            max_hits,
+            kalign_binary_path,
+            release_dates_path,
+            obsolete_pdbs_path,
+            strict_error_check)
+
+
+    def get_templates(
+            self,
+            query_sequence: str,
+            hits: Sequence[parsers.TemplateHit]) -> TemplateSearchResult:
+        """Computes the templates for given query sequence (more details above)."""
+        logging.info('Searching for template for: %s', query_sequence)
+
+        template_features = {}
+        for template_feature_name in TEMPLATE_FEATURES:
+            template_features[template_feature_name] = []
+
+        num_hits = 0
+        errors = []
+        warnings = []
+
+
+        result = _process_custom_template(
+            query_sequence=query_sequence,
+            hit=hit,
+            mmcif_dir=self._mmcif_dir,
+            max_template_date=self._max_template_date,
+            strict_error_check=self._strict_error_check,
+            kalign_binary_path=self._kalign_binary_path)
+
+        if result.error:
+            errors.append(result.error)
+
+        # There could be an error even if there are some results, e.g. thrown by
+        # other unparsable chains in the same mmCIF file.
+        if result.warning:
+            warnings.append(result.warning)
+
+        if result.features is None:
+            logging.info('Skipped invalid hit %s, error: %s, warning: %s',
+                         hit.name, result.error, result.warning)
+        else:
+            # Increment the hit counter, since we got features out of this hit.
+            num_hits += 1
+            for k in template_features:
+                template_features[k].append(result.features[k])
+
+        for name in template_features:
+            if num_hits > 0:
+                template_features[name] = np.stack(
+                    template_features[name], axis=0).astype(TEMPLATE_FEATURES[name])
+            else:
+                # Make sure the feature has correct dtype even if empty.
+                template_features[name] = np.array([], dtype=TEMPLATE_FEATURES[name])
+
+        return TemplateSearchResult(
+            features=template_features, errors=errors, warnings=warnings)
+
