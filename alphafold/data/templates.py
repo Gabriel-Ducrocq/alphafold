@@ -722,9 +722,15 @@ def _process_single_hit(
 
     return SingleHitResult(features=None, error=None, warning=None)
 
+  print("Printing hit sequence and hit query in alphafold/data/templates ")
+  print(hit.hit_sequence)
+  print(hit.query)
   mapping = _build_query_to_hit_index_mapping(
       hit.query, hit.hit_sequence, hit.indices_hit, hit.indices_query,
       query_sequence)
+  print("Mapping:")
+  print(mapping)
+  print("\n\n\n\n")
 
   # The mapping is from the query to the actual hit sequence, so we need to
   # remove gaps (which regardless have a missing confidence score).
@@ -828,13 +834,13 @@ def _process_custom_template(
 
   #  return SingleHitResult(features=None, error=None, warning=None)
 
-  #mapping = _build_query_to_hit_index_mapping(
-  #    hit.query, hit.hit_sequence, hit.indices_hit, hit.indices_query,
-  #    query_sequence)
+  mapping = _build_query_to_hit_index_mapping(
+      hit.query, hit.hit_sequence, hit.indices_hit, hit.indices_query,
+      query_sequence)
 
   # The mapping is from the query to the actual hit sequence, so we need to
   # remove gaps (which regardless have a missing confidence score).
-  #template_sequence = hit.hit_sequence.replace('-', '')
+  template_sequence = hit.hit_sequence.replace('-', '')
 
   hit_pdb_code = "custom_template"
   mmcif_file_name = os.listdir(mmcif_dir)[0]
