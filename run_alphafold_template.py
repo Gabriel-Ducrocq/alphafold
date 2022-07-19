@@ -338,7 +338,18 @@ def main(argv):
     template_searcher = hhsearch.HHSearch(
         binary_path=FLAGS.hhsearch_binary_path,
         databases=[FLAGS.pdb70_database_path])
-    template_featurizer = templates.HhsearchHitFeaturizer(
+
+    if FLAGS.template_path is None:
+      template_featurizer = templates.HhsearchHitFeaturizer(
+        mmcif_dir=FLAGS.template_mmcif_dir,
+        max_template_date=FLAGS.max_template_date,
+        max_hits=MAX_TEMPLATE_HITS,
+        kalign_binary_path=FLAGS.kalign_binary_path,
+        release_dates_path=None,
+        obsolete_pdbs_path=FLAGS.obsolete_pdbs_path)
+    else:
+      logging.info(msg="Using a custom template: max_template date is ignored")
+      template_featurizer = templates.CustomTemplateFeaturizer(
         mmcif_dir=FLAGS.template_mmcif_dir,
         max_template_date=FLAGS.max_template_date,
         max_hits=MAX_TEMPLATE_HITS,
@@ -346,7 +357,8 @@ def main(argv):
         release_dates_path=None,
         obsolete_pdbs_path=FLAGS.obsolete_pdbs_path)
 
-  monomer_data_pipeline = pipeline.DataPipeline(
+  if FLAGS.template_path is None:
+    monomer_data_pipeline = pipeline.DataPipeline(
       jackhmmer_binary_path=FLAGS.jackhmmer_binary_path,
       hhblits_binary_path=FLAGS.hhblits_binary_path,
       uniref90_database_path=FLAGS.uniref90_database_path,
@@ -358,6 +370,19 @@ def main(argv):
       template_featurizer=template_featurizer,
       use_small_bfd=use_small_bfd,
       use_precomputed_msas=FLAGS.use_precomputed_msas)
+  else:
+      monomer_data_pipeline = pipeline.DataPipelineCustomTemplate(
+          jackhmmer_binary_path=FLAGS.jackhmmer_binary_path,
+          hhblits_binary_path=FLAGS.hhblits_binary_path,
+          uniref90_database_path=FLAGS.uniref90_database_path,
+          mgnify_database_path=FLAGS.mgnify_database_path,
+          bfd_database_path=FLAGS.bfd_database_path,
+          uniclust30_database_path=FLAGS.uniclust30_database_path,
+          small_bfd_database_path=FLAGS.small_bfd_database_path,
+          template_searcher=template_searcher,
+          template_featurizer=template_featurizer,
+          use_small_bfd=use_small_bfd,
+          use_precomputed_msas=FLAGS.use_precomputed_msas)
 
   if run_multimer_system:
     num_predictions_per_model = FLAGS.num_multimer_predictions_per_model
