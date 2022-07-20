@@ -661,6 +661,9 @@ def _extract_custom_template_features(
     TemplateAtomMaskAllZerosError: If the mmcif object doesn't have any
       unmasked residues.
   """
+  print("\n\n\n\n")
+  print(mmcif_object)
+  print(mmcif_object.chain_to_seqres)
   if mmcif_object is None or not mmcif_object.chain_to_seqres:
     raise NoChainsError('No chains in PDB: %s_%s' % (pdb_id, template_chain_id))
 
