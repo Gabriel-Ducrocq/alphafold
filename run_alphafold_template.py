@@ -355,7 +355,8 @@ def main(argv):
         max_hits=MAX_TEMPLATE_HITS,
         kalign_binary_path=FLAGS.kalign_binary_path,
         release_dates_path=None,
-        obsolete_pdbs_path=FLAGS.obsolete_pdbs_path)
+        obsolete_pdbs_path=FLAGS.obsolete_pdbs_path,
+        custom_template=True)
 
   if FLAGS.template_path is None:
     monomer_data_pipeline = pipeline.DataPipeline(
