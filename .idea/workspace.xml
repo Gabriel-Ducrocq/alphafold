@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="42bd1659-7ad0-4ef2-aeb5-ee5340acb692" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/alphafold/data/mmcif_parsing.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphafold/data/mmcif_parsing.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/alphafold/data/templates.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphafold/data/templates.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -43,11 +42,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/alphafold/data/templates.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="937" column="76" selection-start-line="937" selection-start-column="76" selection-end-line="937" selection-end-column="76" />
+            <state relative-caret-position="193">
+              <caret line="570" column="29" selection-start-line="570" selection-start-column="29" selection-end-line="570" selection-end-column="29" />
               <folding>
                 <element signature="e#668#678#0" expanded="true" />
               </folding>
@@ -64,11 +63,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/alphafold/data/mmcif_parsing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="339">
-              <caret line="273" selection-start-line="273" selection-end-line="273" />
+            <state relative-caret-position="474">
+              <caret line="282" column="62" lean-forward="true" selection-start-line="282" selection-start-column="62" selection-end-line="282" selection-end-column="62" />
             </state>
           </provider>
         </entry>
@@ -96,7 +95,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>mapping</find>
       <find>logging.log</find>
       <find>TEMPLATE_FEATURES</find>
       <find>raise</find>
@@ -126,6 +124,7 @@
       <find>_atom_site</find>
       <find>CONVER</find>
       <find>CONVERT</find>
+      <find>print(</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -139,8 +138,8 @@
         <option value="$PROJECT_DIR$/alphafold/data/pipeline.py" />
         <option value="$PROJECT_DIR$/run_alphafold_template.py" />
         <option value="$PROJECT_DIR$/alphafold/data/test.py" />
-        <option value="$PROJECT_DIR$/alphafold/data/templates.py" />
         <option value="$PROJECT_DIR$/alphafold/data/mmcif_parsing.py" />
+        <option value="$PROJECT_DIR$/alphafold/data/templates.py" />
       </list>
     </option>
   </component>
@@ -274,20 +273,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/alphafold/data/templates.py">
+    <entry file="file://$PROJECT_DIR$/alphafold/data/mmcif_parsing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="937" column="76" selection-start-line="937" selection-start-column="76" selection-end-line="937" selection-end-column="76" />
-          <folding>
-            <element signature="e#668#678#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="474">
+          <caret line="282" column="62" lean-forward="true" selection-start-line="282" selection-start-column="62" selection-end-line="282" selection-end-column="62" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/alphafold/data/mmcif_parsing.py">
+    <entry file="file://$PROJECT_DIR$/alphafold/data/templates.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="273" selection-start-line="273" selection-end-line="273" />
+        <state relative-caret-position="193">
+          <caret line="570" column="29" selection-start-line="570" selection-start-column="29" selection-end-line="570" selection-end-column="29" />
+          <folding>
+            <element signature="e#668#678#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
