@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="42bd1659-7ad0-4ef2-aeb5-ee5340acb692" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/alphafold/data/templates.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphafold/data/templates.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/alphafold/data/test.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,14 +42,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/alphafold/data/templates.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="283">
-              <caret line="954" column="19" selection-start-line="954" selection-start-column="19" selection-end-line="954" selection-end-column="19" />
+            <state relative-caret-position="373">
+              <caret line="960" column="23" lean-forward="true" selection-start-line="960" selection-start-column="23" selection-end-line="960" selection-end-column="23" />
               <folding>
                 <element signature="e#668#678#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/alphafold/data/test.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="476">
+              <caret line="109" column="32" selection-start-line="109" selection-start-column="32" selection-end-line="109" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -105,6 +114,8 @@
       <find>template_featurizer</find>
       <find>_extract_custom</find>
       <find>_read_file</find>
+      <find>file_id</find>
+      <find>_atom_site</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -118,6 +129,7 @@
         <option value="$PROJECT_DIR$/alphafold/data/pipeline.py" />
         <option value="$PROJECT_DIR$/run_alphafold_template.py" />
         <option value="$PROJECT_DIR$/alphafold/data/templates.py" />
+        <option value="$PROJECT_DIR$/alphafold/data/test.py" />
       </list>
     </option>
   </component>
@@ -143,6 +155,12 @@
               <item name="alphafold" type="b2602c69:ProjectViewProjectNode" />
               <item name="alphafold" type="462c0819:PsiDirectoryNode" />
               <item name="alphafold" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="alphafold" type="b2602c69:ProjectViewProjectNode" />
+              <item name="alphafold" type="462c0819:PsiDirectoryNode" />
+              <item name="alphafold" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -240,11 +258,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/alphafold/data/templates.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="954" column="19" selection-start-line="954" selection-start-column="19" selection-end-line="954" selection-end-column="19" />
+        <state relative-caret-position="373">
+          <caret line="960" column="23" lean-forward="true" selection-start-line="960" selection-start-column="23" selection-end-line="960" selection-end-column="23" />
           <folding>
             <element signature="e#668#678#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alphafold/data/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="109" column="32" selection-start-line="109" selection-start-column="32" selection-end-line="109" selection-end-column="32" />
         </state>
       </provider>
     </entry>
