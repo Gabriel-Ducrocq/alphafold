@@ -435,8 +435,12 @@ def _get_atom_positions(
     auth_chain_id: str,
     max_ca_ca_distance: float) -> Tuple[np.ndarray, np.ndarray]:
   """Gets atom positions and mask from a list of Biopython Residues."""
+  print("\n\n\n\n\n\n\n")
+  print(mmcif_object.chain_to_seqres)
+  print(auth_chain_id)
+  print("\n\n\n\n\n\n\n")
   num_res = len(mmcif_object.chain_to_seqres[auth_chain_id])
-  print("AAAAAAAAAAAAAA")
+
   relevant_chains = [c for c in mmcif_object.structure.get_chains()
                      if c.id == auth_chain_id]
   if len(relevant_chains) != 1:
@@ -447,7 +451,6 @@ def _get_atom_positions(
   all_positions = np.zeros([num_res, residue_constants.atom_type_num, 3])
   all_positions_mask = np.zeros([num_res, residue_constants.atom_type_num],
                                 dtype=np.int64)
-  print("BBBBBBBBBBBB")
   for res_index in range(num_res):
     pos = np.zeros([residue_constants.atom_type_num, 3], dtype=np.float32)
     mask = np.zeros([residue_constants.atom_type_num], dtype=np.float32)
@@ -467,8 +470,6 @@ def _get_atom_positions(
           pos[residue_constants.atom_order['SD']] = [x, y, z]
           mask[residue_constants.atom_order['SD']] = 1.0
 
-      print("CCCCCCCCCC")
-
       # Fix naming errors in arginine residues where NH2 is incorrectly
       # assigned to be closer to CD than NH1.
       cd = residue_constants.atom_order['CD']
@@ -481,7 +482,6 @@ def _get_atom_positions(
         pos[nh1], pos[nh2] = pos[nh2].copy(), pos[nh1].copy()
         mask[nh1], mask[nh2] = mask[nh2].copy(), mask[nh1].copy()
 
-    print("DDDDDDDDD")
     all_positions[res_index] = pos
     all_positions_mask[res_index] = mask
   _check_residue_distances(
@@ -672,16 +672,16 @@ def _extract_custom_template_features(
   # No mapping offset, the query is aligned to the actual sequence.
   mapping_offset = 0
 
-  #try:
+  try:
     # Essentially set to infinity - we don't want to reject templates unless
     # they're really really bad.
 
-  all_atom_positions, all_atom_mask = _get_atom_positions(
+    all_atom_positions, all_atom_mask = _get_atom_positions(
         mmcif_object, chain_id, max_ca_ca_distance=150.0)
-  #except (CaDistanceError, KeyError) as ex:
-  #  raise NoAtomDataInTemplateError(
-  #      'Could not get atom data (%s_%s): %s' % (pdb_id, chain_id, str(ex))
-  #      ) from ex
+  except (CaDistanceError, KeyError) as ex:
+    raise NoAtomDataInTemplateError(
+        'Could not get atom data (%s_%s): %s' % (pdb_id, chain_id, str(ex))
+        ) from ex
 
   all_atom_positions = np.split(all_atom_positions, all_atom_positions.shape[0])
   all_atom_masks = np.split(all_atom_mask, all_atom_mask.shape[0])
