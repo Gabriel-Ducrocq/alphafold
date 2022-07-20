@@ -1022,12 +1022,6 @@ class TemplateHitFeaturizer(abc.ABC):
       hits: Sequence[parsers.TemplateHit]) -> TemplateSearchResult:
     """Computes the templates for given query sequence."""
 
-  @abc.abstractmethod
-  def get_custom_templates(
-      self,
-      query_sequence: str) -> TemplateSearchResult:
-    """Computes the templates for given query sequence."""
-
 
 class HhsearchHitFeaturizer(TemplateHitFeaturizer):
   """A class for turning a3m hits from hhsearch to template features."""
@@ -1193,9 +1187,10 @@ class CustomTemplateFeaturizer(TemplateHitFeaturizer):
     #        strict_error_check)
 
 
-    def get_custom_templates(
+    def get_templates(
             self,
-            query_sequence: str) -> TemplateSearchResult:
+            query_sequence: str,
+            hits: Sequence[parsers.TemplateHit]) -> TemplateSearchResult:
         """Computes the templates for given query sequence (more details above)."""
         logging.info('Searching for template for: %s', query_sequence)
 
