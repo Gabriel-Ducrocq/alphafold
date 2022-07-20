@@ -196,7 +196,6 @@ def parse(*,
 
     header = _get_header(parsed_info)
 
-    print("AAAAAAAAAAA")
 
     # Determine the protein chains, and their start numbers according to the
     # internal mmCIF numbering scheme (likely but not guaranteed to be 1).
@@ -207,7 +206,6 @@ def parse(*,
     seq_start_num = {chain_id: min([monomer.num for monomer in seq])
                      for chain_id, seq in valid_chains.items()}
 
-    print("BBBBBBBBBB")
     # Loop over the atoms for which we have coordinates. Populate two mappings:
     # -mmcif_to_author_chain_id (maps internal mmCIF chain ids to chain ids used
     # the authors / Biopython).
@@ -219,7 +217,6 @@ def parse(*,
         # We only process the first model at the moment.
         continue
 
-      print("CCCCCCCCCCCCC")
       mmcif_to_author_chain_id[atom.mmcif_chain_id] = atom.author_chain_id
 
       if atom.mmcif_chain_id in valid_chains:
@@ -246,7 +243,6 @@ def parse(*,
                                              hetflag=hetflag)
         seq_to_structure_mappings[atom.author_chain_id] = current
 
-    print("DDDDDDDDDDDDDD")
     # Add missing residue information to seq_to_structure_mappings.
     for chain_id, seq_info in valid_chains.items():
       author_chain = mmcif_to_author_chain_id[chain_id]
@@ -258,7 +254,6 @@ def parse(*,
                                                    is_missing=True,
                                                    hetflag=' ')
 
-    print("EEEEEEEEEEEEEE")
     author_chain_to_sequence = {}
     for chain_id, seq_info in valid_chains.items():
       author_chain = mmcif_to_author_chain_id[chain_id]
@@ -269,7 +264,6 @@ def parse(*,
       seq = ''.join(seq)
       author_chain_to_sequence[author_chain] = seq
 
-    print("FFFFFFFFFFFFFFFFFFFFFFFF")
     mmcif_object = MmcifObject(
         file_id=file_id,
         header=header,
@@ -278,7 +272,6 @@ def parse(*,
         seqres_to_structure=seq_to_structure_mappings,
         raw_string=parsed_info)
 
-    print("GGGGGGGGGGGGGGGGGGG")
     return ParsingResult(mmcif_object=mmcif_object, errors=errors)
   except Exception as e:  # pylint:disable=broad-except
     errors[(file_id, '')] = e
