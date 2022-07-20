@@ -24,7 +24,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/run_alphafold_template.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2025">
+            <state relative-caret-position="-2745">
               <caret line="135" column="34" selection-start-line="135" selection-start-column="21" selection-end-line="135" selection-end-column="34" />
               <folding>
                 <element signature="e#653#664#0" expanded="true" />
@@ -45,8 +45,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/alphafold/data/templates.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="382">
-              <caret line="30" column="63" selection-start-line="30" selection-start-column="63" selection-end-line="30" selection-end-column="63" />
+            <state relative-caret-position="211">
+              <caret line="935" column="21" selection-start-line="935" selection-start-column="21" selection-end-line="935" selection-end-column="21" />
+              <folding>
+                <element signature="e#668#678#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -94,8 +97,8 @@
       <find>sum_probs</find>
       <find>convert_pdb_to_mmcif</find>
       <find>_process_cus</find>
-      <find>template_path</find>
       <find>CFMMCIFIO</find>
+      <find>template_path</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -209,16 +212,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/run_alphafold_template.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2025">
-          <caret line="135" column="34" selection-start-line="135" selection-start-column="21" selection-end-line="135" selection-end-column="34" />
-          <folding>
-            <element signature="e#653#664#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/alphafold/data/utils_colabfold.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
@@ -229,10 +222,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/run_alphafold_template.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2745">
+          <caret line="135" column="34" selection-start-line="135" selection-start-column="21" selection-end-line="135" selection-end-column="34" />
+          <folding>
+            <element signature="e#653#664#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/alphafold/data/templates.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
-          <caret line="30" column="63" selection-start-line="30" selection-start-column="63" selection-end-line="30" selection-end-column="63" />
+        <state relative-caret-position="211">
+          <caret line="935" column="21" selection-start-line="935" selection-start-column="21" selection-end-line="935" selection-end-column="21" />
+          <folding>
+            <element signature="e#668#678#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
