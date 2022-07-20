@@ -45,8 +45,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/alphafold/data/templates.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="193">
-              <caret line="570" column="29" selection-start-line="570" selection-start-column="29" selection-end-line="570" selection-end-column="29" />
+            <state relative-caret-position="236">
+              <caret line="567" column="31" selection-start-line="567" selection-start-column="31" selection-end-line="567" selection-end-column="31" />
               <folding>
                 <element signature="e#668#678#0" expanded="true" />
               </folding>
@@ -95,8 +95,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>logging.log</find>
-      <find>TEMPLATE_FEATURES</find>
       <find>raise</find>
       <find>template_mmcif_</find>
       <find>features.pkl</find>
@@ -111,7 +109,6 @@
       <find>Searching for template for</find>
       <find>sum_probs</find>
       <find>convert_pdb_to_mmcif</find>
-      <find>_process_cus</find>
       <find>CFMMCIFIO</find>
       <find>_process_custom</find>
       <find>template_path</find>
@@ -125,6 +122,9 @@
       <find>CONVER</find>
       <find>CONVERT</find>
       <find>print(</find>
+      <find>_process_cus</find>
+      <find>_extract_custom_tem</find>
+      <find>_get_atom_positions</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -282,8 +282,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/alphafold/data/templates.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="570" column="29" selection-start-line="570" selection-start-column="29" selection-end-line="570" selection-end-column="29" />
+        <state relative-caret-position="236">
+          <caret line="567" column="31" selection-start-line="567" selection-start-column="31" selection-end-line="567" selection-end-column="31" />
           <folding>
             <element signature="e#668#678#0" expanded="true" />
           </folding>
