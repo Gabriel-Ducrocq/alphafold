@@ -29,7 +29,7 @@ from alphafold.data import parsers
 from alphafold.data.tools import kalign
 import numpy as np
 from Bio.PDB import MMCIFParser, PDBParser, MMCIF2Dict, MMCIFIO
-from utils_colabfold import CFMMCIFIO
+from alphafold.data import utils_colabfold
 from pathlib import Path
 
 # Internal import (7716).
@@ -908,7 +908,7 @@ def convert_pdb_to_mmcif(pdb_file):
         return
     parser = PDBParser(QUIET=True)
     structure = parser.get_structure(id, pdb_file)
-    cif_io = CFMMCIFIO()
+    cif_io = utils_colabfold.CFMMCIFIO()
     cif_io.set_structure(structure)
     cif_io.save(str(cif_file))
 
