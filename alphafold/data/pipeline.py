@@ -276,8 +276,6 @@ class DataPipelineCustomTemplate(DataPipeline):
                uniref_max_hits,
                use_precomputed_msas)
 
-        self.template_path = template_path
-
     def process(self, input_fasta_path: str, msa_output_dir: str) -> FeatureDict:
         """Runs alignment tools on the input sequence and creates features
          with a custom template instead of a database search."""

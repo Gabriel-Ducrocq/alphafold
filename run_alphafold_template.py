@@ -350,7 +350,7 @@ def main(argv):
     else:
       logging.info(msg="Using a custom template: max_template date is ignored")
       template_featurizer = templates.CustomTemplateFeaturizer(
-        mmcif_dir=FLAGS.template_mmcif_dir,
+        mmcif_dir=FLAGS.template_path,
         max_template_date=FLAGS.max_template_date,
         max_hits=MAX_TEMPLATE_HITS,
         kalign_binary_path=FLAGS.kalign_binary_path,
