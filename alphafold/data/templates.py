@@ -1189,7 +1189,8 @@ class CustomTemplateFeaturizer(TemplateHitFeaturizer):
 
     def get_custom_templates(
             self,
-            query_sequence: str) -> TemplateSearchResult:
+            query_sequence: str,
+            hits: Sequence[parsers.TemplateHit]) -> TemplateSearchResult:
         """Computes the templates for given query sequence (more details above)."""
         logging.info('Searching for template for: %s', query_sequence)
 
