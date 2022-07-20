@@ -934,7 +934,7 @@ def _process_custom_template(
   file_name = os.listdir(mmcif_dir)[0]
   cif_path = Path(os.path.join(mmcif_dir, file_name))
   print("\n\n\n\n\n\n")
-  print("file name:", file_name)
+  print("file name:", mmcif_dir)
   if file_name.split(".")[-1] == "pdb":
       print("CONVERTING TEMPLATE FILE TO MMCIF\n\n\n\n\n\n\n\n\n")
       full_path = Path(os.path.join(mmcif_dir, file_name))
