@@ -274,6 +274,7 @@ def parse(*,
     return ParsingResult(mmcif_object=mmcif_object, errors=errors)
   except Exception as e:  # pylint:disable=broad-except
     errors[(file_id, '')] = e
+    print("WE DON'T REACH TRY !")
     if not catch_all_errors:
       raise
     return ParsingResult(mmcif_object=None, errors=errors)
