@@ -951,6 +951,10 @@ def _process_custom_template(
   parsing_result = mmcif_parsing.parse(
       file_id=hit_pdb_code, mmcif_string=cif_string)
 
+  print("PARSING RESULT")
+  print(parsing_result)
+  print("\n\n\n\n\n")
+
   try:
     features, realign_warning = _extract_custom_template_features(
         mmcif_object=parsing_result.mmcif_object,
