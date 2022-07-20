@@ -28,6 +28,9 @@ from alphafold.data import mmcif_parsing
 from alphafold.data import parsers
 from alphafold.data.tools import kalign
 import numpy as np
+from Bio.PDB import MMCIFParser, PDBParser, MMCIF2Dict, MMCIFIO
+from utils_colabfold import CFMMCIFIO
+from pathlib import Path
 
 # Internal import (7716).
 
@@ -897,6 +900,18 @@ def _process_single_hit(
     return SingleHitResult(features=None, error=error, warning=None)
 
 
+def convert_pdb_to_mmcif(pdb_file):
+    """convert existing pdb files into mmcif with the required poly_seq and revision_date"""
+    id = pdb_file.stem
+    cif_file = pdb_file.parent.joinpath(f"{id}.cif")
+    if cif_file.is_file():
+        return
+    parser = PDBParser(QUIET=True)
+    structure = parser.get_structure(id, pdb_file)
+    cif_io = CFMMCIFIO()
+    cif_io.set_structure(structure)
+    cif_io.save(str(cif_file))
+
 
 def _process_custom_template(
     query_sequence: str,
@@ -915,8 +930,16 @@ def _process_custom_template(
   hit_pdb_code = "custom_template"
   hit_chain_id = hit_pdb_code
   #We deal with only one template, the only mmcif file placed in the folder
-  mmcif_file_name = os.listdir(mmcif_dir)[0]
-  cif_path = os.path.join(mmcif_dir, mmcif_file_name)
+
+  file_name = os.listdir(mmcif_dir)[0]
+  cif_path = Path(os.path.join(mmcif_dir, file_name))
+  if file_name.split(".")[-1] == "pdb":
+      print("CONVERTING TEMPLATE FILE TO MMCIF\n\n\n\n\n\n\n\n\n")
+      full_path = Path(os.path.join(mmcif_dir, file_name))
+      convert_pdb_to_mmcif(full_path)
+
+
+  #cif_path = os.path.join(mmcif_dir, mmcif_file_name)
   # Fail if we can't find the mmCIF file.
   cif_string = _read_file(cif_path)
 
@@ -933,7 +956,8 @@ def _process_custom_template(
         template_chain_id=hit_chain_id,
         kalign_binary_path=kalign_binary_path)
 
-    features['template_sum_probs'] = [0]
+    ##Setting sum_probs to the maximum score since the query and template sequences are the same.
+    features['template_sum_probs'] = [20]
 
     # It is possible there were some errors when parsing the other chains in the
     # mmCIF file, but the template features for the chain we want were still
@@ -1192,7 +1216,7 @@ class CustomTemplateFeaturizer(TemplateHitFeaturizer):
             query_sequence: str,
             hits: Sequence[parsers.TemplateHit]) -> TemplateSearchResult:
         """Computes the templates for given query sequence (more details above)."""
-        logging.info('Searching for template for: %s', query_sequence)
+        logging.info('Treating template for: %s', query_sequence)
 
         template_features = {}
         for template_feature_name in TEMPLATE_FEATURES:
