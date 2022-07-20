@@ -935,10 +935,10 @@ def _process_custom_template(
   #We deal with only one template, the only mmcif file placed in the folder
 
   file_name = os.listdir(mmcif_dir)[0]
-  cif_path = Path(os.path.join(mmcif_dir, file_name))
+  cif_path = Path(os.path.join(mmcif_dir, file_name.split(".")[0] + ".cif"))
   print("\n\n\n\n\n\n")
   print("CIF dir:", mmcif_dir)
-  print("file name:", cif_path)
+  print("file name cif:", cif_path)
   if file_name.split(".")[-1] == "pdb":
       print("CONVERTING TEMPLATE FILE TO MMCIF\n\n\n\n\n\n\n\n\n")
       full_path = Path(os.path.join(mmcif_dir, file_name))
