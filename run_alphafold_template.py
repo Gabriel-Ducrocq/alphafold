@@ -382,7 +382,8 @@ def main(argv):
           template_searcher=template_searcher,
           template_featurizer=template_featurizer,
           use_small_bfd=use_small_bfd,
-          use_precomputed_msas=FLAGS.use_precomputed_msas)
+          use_precomputed_msas=FLAGS.use_precomputed_msas,
+          template_path=FLAGS.template_path)
 
   if run_multimer_system:
     num_predictions_per_model = FLAGS.num_multimer_predictions_per_model
