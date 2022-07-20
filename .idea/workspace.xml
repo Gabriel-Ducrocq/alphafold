@@ -45,8 +45,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/alphafold/data/templates.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="326">
-              <caret line="955" column="19" selection-start-line="955" selection-start-column="19" selection-end-line="955" selection-end-column="19" />
+            <state relative-caret-position="283">
+              <caret line="954" column="19" selection-start-line="954" selection-start-column="19" selection-end-line="954" selection-end-column="19" />
               <folding>
                 <element signature="e#668#678#0" expanded="true" />
               </folding>
@@ -104,6 +104,7 @@
       <find>self.template_path</find>
       <find>template_featurizer</find>
       <find>_extract_custom</find>
+      <find>_read_file</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -239,8 +240,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/alphafold/data/templates.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="955" column="19" selection-start-line="955" selection-start-column="19" selection-end-line="955" selection-end-column="19" />
+        <state relative-caret-position="283">
+          <caret line="954" column="19" selection-start-line="954" selection-start-column="19" selection-end-line="954" selection-end-column="19" />
           <folding>
             <element signature="e#668#678#0" expanded="true" />
           </folding>

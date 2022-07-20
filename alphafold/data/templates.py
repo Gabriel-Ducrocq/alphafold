@@ -937,7 +937,8 @@ def _process_custom_template(
   file_name = os.listdir(mmcif_dir)[0]
   cif_path = Path(os.path.join(mmcif_dir, file_name))
   print("\n\n\n\n\n\n")
-  print("file name:", mmcif_dir)
+  print("CIF dir:", mmcif_dir)
+  print("file name:", cif_path)
   if file_name.split(".")[-1] == "pdb":
       print("CONVERTING TEMPLATE FILE TO MMCIF\n\n\n\n\n\n\n\n\n")
       full_path = Path(os.path.join(mmcif_dir, file_name))
@@ -947,6 +948,11 @@ def _process_custom_template(
   #cif_path = os.path.join(mmcif_dir, mmcif_file_name)
   # Fail if we can't find the mmCIF file.
   cif_string = _read_file(cif_path)
+
+
+  print("STRING")
+  print(cif_string)
+  print("\n\n\n\n\n")
 
   parsing_result = mmcif_parsing.parse(
       file_id=hit_pdb_code, mmcif_string=cif_string)
