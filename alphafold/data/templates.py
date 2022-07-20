@@ -562,14 +562,14 @@ def _extract_template_features(
     # No mapping offset, the query is aligned to the actual sequence.
     mapping_offset = 0
 
-  try:
-    # Essentially set to infinity - we don't want to reject templates unless
-    # they're really really bad.
     print("\n\n\n\n\n\n\n\n\n")
     print("chain_id", chain_id)
     print("MMCIF object")
     print(mmcif_object)
     print("\n\n\n\n\n\n\n\n\n")
+  try:
+    # Essentially set to infinity - we don't want to reject templates unless
+    # they're really really bad.
     all_atom_positions, all_atom_mask = _get_atom_positions(
         mmcif_object, chain_id, max_ca_ca_distance=150.0)
   except (CaDistanceError, KeyError) as ex:
