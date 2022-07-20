@@ -334,7 +334,7 @@ class DataPipelineCustomTemplate(DataPipeline):
             bfd_msa = parsers.parse_a3m(hhblits_bfd_uniclust_result['a3m'])
 
         templates_result = self.template_featurizer.get_custom_templates(
-            query_sequence=input_sequence, hits=None)
+            query_sequence=input_sequence)
 
         sequence_features = make_sequence_features(
             sequence=input_sequence,
