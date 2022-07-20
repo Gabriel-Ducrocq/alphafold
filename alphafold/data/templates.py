@@ -1169,22 +1169,22 @@ class HmmsearchHitFeaturizer(TemplateHitFeaturizer):
 class CustomTemplateFeaturizer(TemplateHitFeaturizer):
     """An abstract base class for turning custom template to template features."""
 
-    def __init__(
-            self,
-            mmcif_dir: str,
-            max_template_date: str,
-            max_hits: int,
-            kalign_binary_path: str,
-            release_dates_path: Optional[str],
-            obsolete_pdbs_path: Optional[str],
-            strict_error_check: bool = False):
-        super().__init__(mmcif_dir,
-            max_template_date,
-            max_hits,
-            kalign_binary_path,
-            release_dates_path,
-            obsolete_pdbs_path,
-            strict_error_check)
+    #def __init__(
+    #        self,
+    #        mmcif_dir: str,
+    #        max_template_date: str,
+    #        max_hits: int,
+    #        kalign_binary_path: str,
+    #        release_dates_path: Optional[str],
+    #        obsolete_pdbs_path: Optional[str],
+    #        strict_error_check: bool = False):
+    #    super().__init__(mmcif_dir,
+    #        max_template_date,
+    #        max_hits,
+    #        kalign_binary_path,
+    #        release_dates_path,
+    #        obsolete_pdbs_path,
+    #        strict_error_check)
 
 
     def get_custom_templates(
