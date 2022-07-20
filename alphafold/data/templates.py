@@ -435,10 +435,6 @@ def _get_atom_positions(
     auth_chain_id: str,
     max_ca_ca_distance: float) -> Tuple[np.ndarray, np.ndarray]:
   """Gets atom positions and mask from a list of Biopython Residues."""
-  print("\n\n\n\n\n\n\n")
-  print(mmcif_object.chain_to_seqres)
-  print(auth_chain_id)
-  print("\n\n\n\n\n\n\n")
   num_res = len(mmcif_object.chain_to_seqres[auth_chain_id])
 
   relevant_chains = [c for c in mmcif_object.structure.get_chains()
@@ -624,9 +620,7 @@ def _extract_custom_template_features(
     pdb_id: str,
     mapping: Mapping[int, int],
     template_sequence: str,
-    query_sequence: str,
-    template_chain_id: str,
-    kalign_binary_path: str) -> Tuple[Dict[str, Any], Optional[str]]:
+    query_sequence: str) -> Tuple[Dict[str, Any], Optional[str]]:
   """Parses atom positions in the target structure and aligns with the query, for a custom template.
 
   Atoms for each residue in the template structure are indexed to coincide
@@ -666,16 +660,16 @@ def _extract_custom_template_features(
       unmasked residues.
   """
   if mmcif_object is None or not mmcif_object.chain_to_seqres:
-    raise NoChainsError('No chains in PDB: %s_%s' % (pdb_id, template_chain_id))
+    raise NoChainsError('No chains in PDB template')
 
-  chain_id = template_chain_id
   # No mapping offset, the query is aligned to the actual sequence.
   mapping_offset = 0
 
+  ##This can work only with a monomer !! If multimer, there can be several keys !!
+  chain_id = len(mmcif_object.chain_to_seqres.keys())[0]
   try:
     # Essentially set to infinity - we don't want to reject templates unless
     # they're really really bad.
-
     all_atom_positions, all_atom_mask = _get_atom_positions(
         mmcif_object, chain_id, max_ca_ca_distance=150.0)
   except (CaDistanceError, KeyError) as ex:
@@ -715,6 +709,8 @@ def _extract_custom_template_features(
   templates_aatype = residue_constants.sequence_to_onehot(
       output_templates_sequence, residue_constants.HHBLITS_AA_TO_ID)
 
+  ###Be careful to template_domain_names ! It seems it is not a features taken into consideration for forward pass, but
+  ### we never know... Need to be properly checked !
   return (
       {
           'template_all_atom_positions': np.array(templates_all_atom_positions),
@@ -933,7 +929,6 @@ def _process_custom_template(
   template_sequence = query_sequence
 
   hit_pdb_code = "custom_template"
-  hit_chain_id = hit_pdb_code
   #We deal with only one template, the only mmcif file placed in the folder
 
   file_name = os.listdir(mmcif_dir)[0]
@@ -957,9 +952,7 @@ def _process_custom_template(
         pdb_id=hit_pdb_code,
         mapping=mapping,
         template_sequence=template_sequence,
-        query_sequence=query_sequence,
-        template_chain_id=hit_chain_id,
-        kalign_binary_path=kalign_binary_path)
+        query_sequence=query_sequence)
 
     ##Setting sum_probs to the maximum score since the query and template sequences are the same.
     features['template_sum_probs'] = [20]

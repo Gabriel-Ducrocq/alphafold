@@ -45,8 +45,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/alphafold/data/templates.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="440" column="25" selection-start-line="440" selection-start-column="25" selection-end-line="440" selection-end-column="25" />
+            <state relative-caret-position="301">
+              <caret line="712" column="52" selection-start-line="712" selection-start-column="52" selection-end-line="712" selection-end-column="52" />
               <folding>
                 <element signature="e#668#678#0" expanded="true" />
               </folding>
@@ -66,8 +66,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/alphafold/data/mmcif_parsing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="474">
-              <caret line="282" column="62" lean-forward="true" selection-start-line="282" selection-start-column="62" selection-end-line="282" selection-end-column="62" />
+            <state relative-caret-position="-50">
+              <caret line="338" column="23" selection-start-line="338" selection-start-column="4" selection-end-line="338" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -95,16 +95,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>raise</find>
-      <find>template_mmcif_</find>
-      <find>features.pkl</find>
-      <find>template_sequence</find>
-      <find>_process_sin</find>
-      <find>template_mmcif_dir</find>
-      <find>Custom</find>
-      <find>Optional</find>
-      <find>templates_result</find>
-      <find>data_pipeline</find>
       <find>_extract_c</find>
       <find>Searching for template for</find>
       <find>sum_probs</find>
@@ -121,10 +111,20 @@
       <find>_atom_site</find>
       <find>CONVER</find>
       <find>CONVERT</find>
-      <find>print(</find>
       <find>_process_cus</find>
       <find>_extract_custom_tem</find>
+      <find>_get_p</find>
+      <find>_extract_template_features</find>
+      <find>_extract_custom_template_features</find>
+      <find>print(</find>
       <find>_get_atom_positions</find>
+      <find>hit_chain_id</find>
+      <find>parse</find>
+      <find>chain_id</find>
+      <find>_get_protein_chains</find>
+      <find>_get_atom</find>
+      <find>_extract_cu</find>
+      <find>.keys()</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -256,6 +256,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/alphafold/data/mmcif_parsing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-50">
+          <caret line="338" column="23" selection-start-line="338" selection-start-column="4" selection-end-line="338" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/alphafold/data/utils_colabfold.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
@@ -273,17 +280,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/alphafold/data/mmcif_parsing.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="474">
-          <caret line="282" column="62" lean-forward="true" selection-start-line="282" selection-start-column="62" selection-end-line="282" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/alphafold/data/templates.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="440" column="25" selection-start-line="440" selection-start-column="25" selection-end-line="440" selection-end-column="25" />
+        <state relative-caret-position="301">
+          <caret line="712" column="52" selection-start-line="712" selection-start-column="52" selection-end-line="712" selection-end-column="52" />
           <folding>
             <element signature="e#668#678#0" expanded="true" />
           </folding>
