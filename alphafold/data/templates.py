@@ -666,7 +666,7 @@ def _extract_custom_template_features(
   mapping_offset = 0
 
   ##This can work only with a monomer !! If multimer, there can be several keys !!
-  chain_id = len(mmcif_object.chain_to_seqres.keys())[0]
+  chain_id = mmcif_object.chain_to_seqres.keys()[0]
   try:
     # Essentially set to infinity - we don't want to reject templates unless
     # they're really really bad.

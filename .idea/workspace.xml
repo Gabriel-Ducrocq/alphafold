@@ -45,8 +45,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/alphafold/data/templates.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="301">
-              <caret line="712" column="52" selection-start-line="712" selection-start-column="52" selection-end-line="712" selection-end-column="52" />
+            <state relative-caret-position="223">
+              <caret line="669" column="6" lean-forward="true" selection-start-line="669" selection-start-column="6" selection-end-line="669" selection-end-column="6" />
               <folding>
                 <element signature="e#668#678#0" expanded="true" />
               </folding>
@@ -95,7 +95,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>_extract_c</find>
       <find>Searching for template for</find>
       <find>sum_probs</find>
       <find>convert_pdb_to_mmcif</find>
@@ -125,6 +124,7 @@
       <find>_get_atom</find>
       <find>_extract_cu</find>
       <find>.keys()</find>
+      <find>mmcif_object.chain_to_seqres</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -282,8 +282,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/alphafold/data/templates.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="712" column="52" selection-start-line="712" selection-start-column="52" selection-end-line="712" selection-end-column="52" />
+        <state relative-caret-position="223">
+          <caret line="669" column="6" lean-forward="true" selection-start-line="669" selection-start-column="6" selection-end-line="669" selection-end-column="6" />
           <folding>
             <element signature="e#668#678#0" expanded="true" />
           </folding>
