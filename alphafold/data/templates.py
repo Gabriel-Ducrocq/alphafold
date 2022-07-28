@@ -620,6 +620,7 @@ def _extract_custom_template_features(
     pdb_id: str,
     mapping: Mapping[int, int],
     template_sequence: str,
+    template_chain_id: int,
     query_sequence: str) -> Tuple[Dict[str, Any], Optional[str]]:
   """Parses atom positions in the target structure and aligns with the query, for a custom template.
 
@@ -666,7 +667,10 @@ def _extract_custom_template_features(
   mapping_offset = 0
 
   ##This can work only with a monomer !! If multimer, there can be several keys !!
-  chain_id = list(mmcif_object.chain_to_seqres.keys())[0]
+  #chain_id = list(mmcif_object.chain_to_seqres.keys())[0]
+
+  #Generalizing the above line to homomer custom templates:
+  chain_id = template_chain_id
   try:
     # Essentially set to infinity - we don't want to reject templates unless
     # they're really really bad.
@@ -919,24 +923,21 @@ def _process_custom_template(
     mmcif_dir: str,
     max_template_date: datetime.datetime,
     kalign_binary_path: str,
+    template_chain_id: int,
     strict_error_check: bool = False) -> SingleHitResult:
-  """Tries to extract template features from a single HHSearch hit."""
+  """Extract features from a template file"""
 
+  #The mapping is the same whatever chain we target, since this code only deals with homomers and templates from a previous alphafold run.
   mapping = {i:i for i in range(len(query_sequence))}
 
-  # The mapping is from the query to the actual hit sequence, so we need to
-  # remove gaps (which regardless have a missing confidence score).
   template_sequence = query_sequence
 
   hit_pdb_code = "custom_template"
   #We deal with only one template, the only mmcif file placed in the folder
 
+  ##Change here, otherwise we may get the path to the pdb file
   file_name = os.listdir(mmcif_dir)[0]
   cif_path = Path(os.path.join(mmcif_dir, file_name.split(".")[0] + ".cif"))
-  if file_name.split(".")[-1] == "pdb":
-      full_path = Path(os.path.join(mmcif_dir, file_name))
-      convert_pdb_to_mmcif(full_path)
-
 
   #cif_path = os.path.join(mmcif_dir, mmcif_file_name)
   # Fail if we can't find the mmCIF file.
@@ -951,6 +952,7 @@ def _process_custom_template(
         mmcif_object=parsing_result.mmcif_object,
         pdb_id=hit_pdb_code,
         mapping=mapping,
+        template_chain_id = template_chain_id,
         template_sequence=template_sequence,
         query_sequence=query_sequence)
 
@@ -1230,30 +1232,50 @@ class CustomTemplateFeaturizer(TemplateHitFeaturizer):
         errors = []
         warnings = []
 
+        file_name = os.listdir(self._mmcif_dir)[0]
+        cif_path = Path(os.path.join(self._mmcif_dir, file_name.split(".")[0] + ".cif"))
+        if file_name.split(".")[-1] == "pdb":
+            full_path = Path(os.path.join(self._mmcif_dir, file_name))
+            convert_pdb_to_mmcif(full_path)
 
-        result = _process_custom_template(
-            query_sequence=query_sequence,
-            mmcif_dir=self._mmcif_dir,
-            max_template_date=self._max_template_date,
-            strict_error_check=self._strict_error_check,
-            kalign_binary_path=self._kalign_binary_path)
+        cif_string = _read_file(cif_path)
 
-        if result.error:
-            errors.append(result.error)
 
-        # There could be an error even if there are some results, e.g. thrown by
-        # other unparsable chains in the same mmCIF file.
-        if result.warning:
-            warnings.append(result.warning)
+        ##We are parsing the cif file twice, once here and once again in _process_custom_template. Not optimal  but
+        ##the number of template files is one in our case and the parsing is fast.
+        hit_pdb_code = "custom_template"
+        parsing_result = mmcif_parsing.parse(
+            file_id=hit_pdb_code, mmcif_string=cif_string)
 
-        if result.features is None:
-            logging.info('Skipped invalid template, error: %s, warning: %s',
-                         result.error, result.warning)
-        else:
-            # Increment the hit counter, since we got features out of this hit.
-            num_hits += 1
-            for k in template_features:
-                template_features[k].append(result.features[k])
+        chain_ids = list(parsing_result.mmcif_object.chain_to_seqres.keys())
+
+        ##For all the chains in our homomer or monomer
+        for template_chain_id in chain_ids:
+
+            result = _process_custom_template(
+                query_sequence=query_sequence,
+                mmcif_dir=self._mmcif_dir,
+                max_template_date=self._max_template_date,
+                strict_error_check=self._strict_error_check,
+                template_chain_id = int(template_chain_id),
+                kalign_binary_path=self._kalign_binary_path)
+
+            if result.error:
+                errors.append(result.error)
+
+            # There could be an error even if there are some results, e.g. thrown by
+            # other unparsable chains in the same mmCIF file.
+            if result.warning:
+                warnings.append(result.warning)
+
+            if result.features is None:
+                logging.info('Skipped invalid template, error: %s, warning: %s',
+                             result.error, result.warning)
+            else:
+                # Increment the hit counter, since we got features out of this hit.
+                num_hits += 1
+                for k in template_features:
+                    template_features[k].append(result.features[k])
 
         for name in template_features:
             if num_hits > 0:

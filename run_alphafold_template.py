@@ -321,7 +321,8 @@ def main(argv):
 
   if run_multimer_system:
     if FLAGS.template_path is not None:
-        logging.info("Alphafold multimer ignores the custom template and make a database search")
+        logging.info("Alphafold multimer with a custom template\n\n\n")
+        logging.info("This code is suitable for homomers and alphafold predictions as templates ONLY \n\n\n")
 
     template_searcher = hmmsearch.Hmmsearch(
         binary_path=FLAGS.hmmsearch_binary_path,
@@ -387,12 +388,12 @@ def main(argv):
           template_path=FLAGS.template_path)
 
   if run_multimer_system:
-    num_predictions_per_model = FLAGS.num_multimer_predictions_per_model
-    data_pipeline = pipeline_multimer.DataPipeline(
-        monomer_data_pipeline=monomer_data_pipeline,
-        jackhmmer_binary_path=FLAGS.jackhmmer_binary_path,
-        uniprot_database_path=FLAGS.uniprot_database_path,
-        use_precomputed_msas=FLAGS.use_precomputed_msas)
+      num_predictions_per_model = FLAGS.num_multimer_predictions_per_model
+      data_pipeline = pipeline_multimer.DataPipeline(
+            monomer_data_pipeline=monomer_data_pipeline,
+            jackhmmer_binary_path=FLAGS.jackhmmer_binary_path,
+            uniprot_database_path=FLAGS.uniprot_database_path,
+            use_precomputed_msas=FLAGS.use_precomputed_msas)
   else:
     num_predictions_per_model = 1
     data_pipeline = monomer_data_pipeline
