@@ -923,7 +923,7 @@ def _process_custom_template(
     mmcif_dir: str,
     max_template_date: datetime.datetime,
     kalign_binary_path: str,
-    template_chain_id: int,
+    template_chain_id: str,
     strict_error_check: bool = False) -> SingleHitResult:
   """Extract features from a template file"""
 
@@ -935,6 +935,13 @@ def _process_custom_template(
   struct = pdb_parser.get_structure(file_name, pdb_path)
   chains_id = np.array([chain.get_id() for chain in struct.get_chains()])
   indexes = np.array(range(len(chains_id)))
+  if np.sum(chains_id == template_chain_id) == 0:
+    logging.error("Not chain corresponding the template_chain_id:", template_chain_id)
+    raise ValueError(f'Could not template_chain_id  {template_chain_id} in the pdb file')
+  elif np.sum(chains_id == template_chain_id) > 1:
+    logging.error("More than one chain corresponding to the template_chain_id:", template_chain_id)
+    raise ValueError(f'More than one chain corresponding to the template_chain_id  {template_chain_id} in the pdb file')
+
   index = indexes[chains_id == template_chain_id][0]
   list_of_res_per_chain = [e.get_full_id()[3][1] for e in struct.get_chains()[index].get_residues()]
 
@@ -1268,7 +1275,7 @@ class CustomTemplateFeaturizer(TemplateHitFeaturizer):
                 mmcif_dir=self._mmcif_dir,
                 max_template_date=self._max_template_date,
                 strict_error_check=self._strict_error_check,
-                template_chain_id = int(template_chain_id),
+                template_chain_id = template_chain_id,
                 kalign_binary_path=self._kalign_binary_path)
 
             if result.error:
@@ -1343,7 +1350,7 @@ class MultimerCustomTemplateFeaturizer(TemplateHitFeaturizer):
             mmcif_dir=self._mmcif_dir,
             max_template_date=self._max_template_date,
             strict_error_check=self._strict_error_check,
-            template_chain_id=int(template_chain_id),
+            template_chain_id=template_chain_id,
             kalign_binary_path=self._kalign_binary_path)
 
       if result.error:
