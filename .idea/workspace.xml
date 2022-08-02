@@ -54,8 +54,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/alphafold/data/templates.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="470">
-              <caret line="951" column="76" lean-forward="true" selection-start-line="951" selection-start-column="76" selection-end-line="951" selection-end-column="76" />
+            <state relative-caret-position="320">
+              <caret line="620" column="31" lean-forward="true" selection-start-line="620" selection-start-column="31" selection-end-line="620" selection-end-column="31" />
               <folding>
                 <element signature="e#668#678#0" expanded="true" />
               </folding>
@@ -104,7 +104,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>_extract_template_features</find>
       <find>_find_template_in_pdb</find>
       <find>chain_to_seqres[</find>
       <find>hh</find>
@@ -134,6 +133,7 @@
       <find>_process_custom_temp</find>
       <find>HmmsearchHitFeaturizer</find>
       <find>_process_custom_template</find>
+      <find>_get_atom_positions</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -308,8 +308,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/alphafold/data/templates.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="470">
-          <caret line="951" column="76" lean-forward="true" selection-start-line="951" selection-start-column="76" selection-end-line="951" selection-end-column="76" />
+        <state relative-caret-position="320">
+          <caret line="620" column="31" lean-forward="true" selection-start-line="620" selection-start-column="31" selection-end-line="620" selection-end-column="31" />
           <folding>
             <element signature="e#668#678#0" expanded="true" />
           </folding>

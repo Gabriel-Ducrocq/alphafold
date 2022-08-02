@@ -620,7 +620,7 @@ def _extract_custom_template_features(
     pdb_id: str,
     mapping: Mapping[int, int],
     template_sequence: str,
-    template_chain_id: int,
+    template_chain_id: str,
     query_sequence: str) -> Tuple[Dict[str, Any], Optional[str]]:
   """Parses atom positions in the target structure and aligns with the query, for a custom template.
 
