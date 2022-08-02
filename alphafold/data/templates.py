@@ -928,7 +928,19 @@ def _process_custom_template(
   """Extract features from a template file"""
 
   #The mapping is the same whatever chain we target, since this code only deals with homomers and templates from a previous alphafold run.
-  mapping = {i:i for i in range(len(query_sequence))}
+  #We use a slightly more general mapping than previously: now, all the residues need not to be present in the chains.
+  file_name = os.listdir(mmcif_dir)[0]
+  pdb_path = Path(os.path.join(mmcif_dir, file_name.split(".")[0] + ".pdb"))
+  pdb_parser = PDBParser()
+  struct = pdb_parser.get_structure(file_name, pdb_path)
+  chains_id = np.array([chain.get_id() for chain in struct.get_chains()])
+  indexes = np.array(range(len(chains_id)))
+  index = indexes[chains_id == template_chain_id][0]
+  list_of_res_per_chain = [e.get_full_id()[3][1] for e in struct.get_chains()[index].get_residues()]
+
+  #mapping = {i:i for i in range(len(query_sequence))}
+  mapping = {id:i for i,id in enumerate(list_of_res_per_chain)}
+
 
   template_sequence = query_sequence
 
