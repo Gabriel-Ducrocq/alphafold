@@ -54,8 +54,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/alphafold/data/templates.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
-              <caret line="920" column="28" selection-start-line="920" selection-start-column="4" selection-end-line="920" selection-end-column="28" />
+            <state relative-caret-position="470">
+              <caret line="951" column="76" lean-forward="true" selection-start-line="951" selection-start-column="76" selection-end-line="951" selection-end-column="76" />
               <folding>
                 <element signature="e#668#678#0" expanded="true" />
               </folding>
@@ -308,8 +308,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/alphafold/data/templates.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="920" column="28" selection-start-line="920" selection-start-column="4" selection-end-line="920" selection-end-column="28" />
+        <state relative-caret-position="470">
+          <caret line="951" column="76" lean-forward="true" selection-start-line="951" selection-start-column="76" selection-end-line="951" selection-end-column="76" />
           <folding>
             <element signature="e#668#678#0" expanded="true" />
           </folding>

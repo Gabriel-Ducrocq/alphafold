@@ -943,7 +943,8 @@ def _process_custom_template(
     raise ValueError(f'More than one chain corresponding to the template_chain_id  {template_chain_id} in the pdb file')
 
   index = indexes[chains_id == template_chain_id][0]
-  list_of_res_per_chain = [e.get_full_id()[3][1] for e in struct.get_chains()[index].get_residues()]
+  all_chains = [chain for chain in struct.get_chains()]
+  list_of_res_per_chain = [e.get_full_id()[3][1] for e in all_chains[index].get_residues()]
 
   #mapping = {i:i for i in range(len(query_sequence))}
   mapping = {id:i for i,id in enumerate(list_of_res_per_chain)}
