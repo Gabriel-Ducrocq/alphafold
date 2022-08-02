@@ -320,10 +320,6 @@ def main(argv):
     raise ValueError('All FASTA paths must have a unique basename.')
 
   if run_multimer_system:
-    if FLAGS.template_path is not None:
-        logging.info("Alphafold multimer with a custom template\n\n\n")
-        logging.info("This code is suitable for homomers and alphafold predictions as templates ONLY \n\n\n")
-
     template_searcher = hmmsearch.Hmmsearch(
         binary_path=FLAGS.hmmsearch_binary_path,
         hmmbuild_binary_path=FLAGS.hmmbuild_binary_path,
@@ -335,6 +331,17 @@ def main(argv):
         kalign_binary_path=FLAGS.kalign_binary_path,
         release_dates_path=None,
         obsolete_pdbs_path=FLAGS.obsolete_pdbs_path)
+    if FLAGS.template_path is not None:
+        logging.info("Alphafold multimer with a custom template\n\n\n")
+        logging.info("This code is suitable for homomers and alphafold predictions as templates ONLY \n\n\n")
+        template_featurizer = templates.MultimerCustomTemplateFeaturizer(
+            mmcif_dir=FLAGS.template_path,
+            max_template_date=FLAGS.max_template_date,
+            max_hits=MAX_TEMPLATE_HITS,
+            kalign_binary_path=FLAGS.kalign_binary_path,
+            release_dates_path=None,
+            obsolete_pdbs_path=FLAGS.obsolete_pdbs_path)
+
   else:
     template_searcher = hhsearch.HHSearch(
         binary_path=FLAGS.hhsearch_binary_path,

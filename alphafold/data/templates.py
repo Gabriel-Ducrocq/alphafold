@@ -941,8 +941,7 @@ def _process_custom_template(
   #mapping = {i:i for i in range(len(query_sequence))}
   mapping = {id:i for i,id in enumerate(list_of_res_per_chain)}
 
-
-  template_sequence = query_sequence
+  template_sequence = ''.join([query_sequence[id] for id in mapping.keys()])
 
   hit_pdb_code = "custom_template"
   #We deal with only one template, the only mmcif file placed in the folder
@@ -1300,3 +1299,91 @@ class CustomTemplateFeaturizer(TemplateHitFeaturizer):
         return TemplateSearchResult(
             features=template_features, errors=errors, warnings=warnings)
 
+
+class MultimerCustomTemplateFeaturizer(TemplateHitFeaturizer):
+  """A class for turning a3m hits from hmmsearch to template features."""
+
+  def get_templates(
+      self,
+      query_sequence: str,
+      hits: Sequence[parsers.TemplateHit]) -> TemplateSearchResult:
+    """Computes the templates for given query sequence (more details above)."""
+    logging.info('Treating template for: %s', query_sequence)
+
+    template_features = {}
+    for template_feature_name in TEMPLATE_FEATURES:
+        template_features[template_feature_name] = []
+
+    already_seen = set()
+    num_hits = 0
+    errors = []
+    warnings = []
+
+    file_name = os.listdir(self._mmcif_dir)[0]
+    cif_path = Path(os.path.join(self._mmcif_dir, file_name.split(".")[0] + ".cif"))
+    if file_name.split(".")[-1] == "pdb":
+        full_path = Path(os.path.join(self._mmcif_dir, file_name))
+        convert_pdb_to_mmcif(full_path)
+
+    cif_string = _read_file(cif_path)
+
+    ##We are parsing the cif file twice, once here and once again in _process_custom_template. Not optimal  but
+    ##the number of template files is one in our case and the parsing is fast.
+    hit_pdb_code = "custom_template"
+    parsing_result = mmcif_parsing.parse(
+        file_id=hit_pdb_code, mmcif_string=cif_string)
+
+    chain_ids = list(parsing_result.mmcif_object.chain_to_seqres.keys())
+
+    ##For all the chains in our homomer or monomer
+    for template_chain_id in chain_ids:
+
+      result = _process_custom_template(
+            query_sequence=query_sequence,
+            mmcif_dir=self._mmcif_dir,
+            max_template_date=self._max_template_date,
+            strict_error_check=self._strict_error_check,
+            template_chain_id=int(template_chain_id),
+            kalign_binary_path=self._kalign_binary_path)
+
+      if result.error:
+        errors.append(result.error)
+
+      # There could be an error even if there are some results, e.g. thrown by
+      # other unparsable chains in the same mmCIF file.
+      if result.warning:
+        warnings.append(result.warning)
+
+      if result.features is None:
+        logging.debug('Skipped invalid template, error: %s, warning: %s',
+                      result.error, result.warning)
+      else:
+        already_seen_key = result.features['template_sequence']
+        if already_seen_key in already_seen:
+          continue
+        # Increment the hit counter, since we got features out of this hit.
+        already_seen.add(already_seen_key)
+        for k in template_features:
+          template_features[k].append(result.features[k])
+
+    if already_seen:
+      for name in template_features:
+        template_features[name] = np.stack(
+            template_features[name], axis=0).astype(TEMPLATE_FEATURES[name])
+    else:
+      num_res = len(query_sequence)
+      # Construct a default template with all zeros.
+      template_features = {
+          'template_aatype': np.zeros(
+              (1, num_res, len(residue_constants.restypes_with_x_and_gap)),
+              np.float32),
+          'template_all_atom_masks': np.zeros(
+              (1, num_res, residue_constants.atom_type_num), np.float32),
+          'template_all_atom_positions': np.zeros(
+              (1, num_res, residue_constants.atom_type_num, 3), np.float32),
+          'template_domain_names': np.array([''.encode()], dtype=np.object),
+          'template_sequence': np.array([''.encode()], dtype=np.object),
+          'template_sum_probs': np.array([0], dtype=np.float32)
+      }
+    return TemplateSearchResult(
+        features=template_features, errors=errors, warnings=warnings)
