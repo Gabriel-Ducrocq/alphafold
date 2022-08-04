@@ -1329,21 +1329,30 @@ class MultimerCustomTemplateFeaturizer(TemplateHitFeaturizer):
 
     file_name = os.listdir(self._mmcif_dir)[0]
     cif_path = Path(os.path.join(self._mmcif_dir, file_name.split(".")[0] + ".cif"))
+
+    print("\n\n\n\n CIF path:", cif_path)
+    print("\n\n\n\n")
     if file_name.split(".")[-1] == "pdb":
         full_path = Path(os.path.join(self._mmcif_dir, file_name))
         convert_pdb_to_mmcif(full_path)
 
     cif_string = _read_file(cif_path)
 
+    print("\n\n\n")
+    print("File string:", cif_string)
+    print("\n\n\n")
     ##We are parsing the cif file twice, once here and once again in _process_custom_template. Not optimal  but
     ##the number of template files is one in our case and the parsing is fast.
     hit_pdb_code = "custom_template"
     parsing_result = mmcif_parsing.parse(
         file_id=hit_pdb_code, mmcif_string=cif_string)
 
+    print("\n\n\n")
+    print(parsing_result.errors)
+    print("\n\n\n")
     chain_ids = list(parsing_result.mmcif_object.chain_to_seqres.keys())
 
-    ##For all the chains in our homomer or monomer
+    ##For all the chains in our homomer or monomer template
     for template_chain_id in chain_ids:
 
       result = _process_custom_template(
