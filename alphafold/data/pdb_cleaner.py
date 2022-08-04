@@ -2,7 +2,7 @@ from absl import flags
 from absl import app
 
 flags.DEFINE_string('pdb_path_input', None, 'Path to the pdb file to clean.')
-flags.DEFINE_string('pdb_path_output', None, 'Path to the pdb file to clean.')
+flags.DEFINE_string('pdb_path_output', None, 'Path to the pdb file to the cleaned.')
 FLAGS = flags.FLAGS
 
 def main(argv):

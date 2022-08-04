@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="42bd1659-7ad0-4ef2-aeb5-ee5340acb692" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/alphafold/data/pdb_cleaner.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alphafold/data/pdb_cleaner.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphafold/data/pdb_cleaner.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,8 +15,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/run_alphafold_template.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1013">
-              <caret line="286" column="19" lean-forward="true" selection-start-line="286" selection-start-column="19" selection-end-line="286" selection-end-column="19" />
+            <state relative-caret-position="208">
+              <caret line="135" column="19" selection-start-line="135" selection-start-column="6" selection-end-line="135" selection-end-column="19" />
               <folding>
                 <element signature="e#653#664#0" expanded="true" />
               </folding>
@@ -70,8 +69,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/alphafold/data/pdb_cleaner.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="23" column="31" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="31" />
+            <state relative-caret-position="120">
+              <caret line="8" column="46" lean-forward="true" selection-start-line="8" selection-start-column="46" selection-end-line="8" selection-end-column="46" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
               </folding>
@@ -132,7 +131,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>MMCIF</find>
       <find>convert_pd</find>
       <find>parse</find>
       <find>MM</find>
@@ -155,13 +153,14 @@
       <find>_read_file</find>
       <find>catch_all_errors</find>
       <find>conve</find>
-      <find>add_assembly_features</find>
       <find>FLAGS</find>
       <find>import fla</find>
       <find>FLAGS.</find>
       <find>flags.</find>
       <find>app.</find>
+      <find>add_assembly_features</find>
       <find>main</find>
+      <find>DEFINE_string</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -351,8 +350,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/run_alphafold_template.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1013">
-          <caret line="286" column="19" lean-forward="true" selection-start-line="286" selection-start-column="19" selection-end-line="286" selection-end-column="19" />
+        <state relative-caret-position="208">
+          <caret line="135" column="19" selection-start-line="135" selection-start-column="6" selection-end-line="135" selection-end-column="19" />
           <folding>
             <element signature="e#653#664#0" expanded="true" />
           </folding>
@@ -361,8 +360,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/alphafold/data/pdb_cleaner.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="31" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="31" />
+        <state relative-caret-position="120">
+          <caret line="8" column="46" lean-forward="true" selection-start-line="8" selection-start-column="46" selection-end-line="8" selection-end-column="46" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
           </folding>
