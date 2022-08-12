@@ -3,9 +3,9 @@ import argparse
 
 parser = argparse.ArgumentParser(description='Removes all the unwanted residues from a protein and keeps only the ones'
                                              'in tje provided json')
-parser.add_argument(dest="pdb_input_file")
-parser.add_argument(dest="pdb_output_file")
-parser.add_argument(dest="keptResiduals")
+parser.add_argument("--pdb_input", dest="pdb_input_file")
+parser.add_argument("--pdb_output", dest="pdb_output_file")
+parser.add_argument("--keptResiduals",  dest="keptResiduals")
 
 def remove_residuals(pdb_input_file: str, pdb_output_file: str, keptResiduals: str):
     CHAIN_ID_SLICE = slice(21, 22)
