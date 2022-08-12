@@ -28,4 +28,4 @@ def remove_residuals(pdb_input_file: str, pdb_output_file: str, keptResiduals: s
 
 if __name__ == '__main__':
     args = parser.parse_args()
-    remove_residuals(args.pdb_input_file, args.pdb_output_file, args.KeptResiduals)
+    remove_residuals(args.pdb_input_file, args.pdb_output_file, args.keptResiduals)
