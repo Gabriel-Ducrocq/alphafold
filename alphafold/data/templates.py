@@ -947,7 +947,13 @@ def _process_custom_template(
   list_of_res_per_chain = [e.get_full_id()[3][1] for e in all_chains[index].get_residues()]
 
   #mapping = {i:i for i in range(len(query_sequence))}
-  mapping = {id:i for i,id in enumerate(list_of_res_per_chain)}
+  ## HERE WE SHOULD OFFSET THE ID BY ONE. WHY ? MY HYPOTHESIS IS THAT IN THE ORIGINAL ALPHAFOLD THEY COMPUTE THE MAPPING
+  ## FROM AN ALIGNMENT PROCEDURE WHICH (PROBABLY) STARTS THE INDEX OF THE CHAIN AT 0, WHILE IN MY VERSION I USE THE RESIDUE
+  ## NUMBER FROM PDB/CIF FILE WHICH STARTS AT ONE !
+
+  ## CHECK ALSO THAT THE extract_atom_positions ACTUALLY HAS ONLY THE EXISTING RESIDUES IN THE ARRAY AND THAT IS WHY WE
+  ## SHOULD START i to 0 an proceed to 1 etc...
+  mapping = {id-1:i for i,id in enumerate(list_of_res_per_chain)}
   print("Mapping:", mapping)
   print("\n\n\n")
   print(query_sequence)
