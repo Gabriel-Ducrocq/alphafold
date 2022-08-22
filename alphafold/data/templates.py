@@ -948,7 +948,9 @@ def _process_custom_template(
 
   #mapping = {i:i for i in range(len(query_sequence))}
   mapping = {id:i for i,id in enumerate(list_of_res_per_chain)}
-
+  print("Mapping:", mapping)
+  print("\n\n\n")
+  print(query_sequence)
   template_sequence = ''.join([query_sequence[id] for id in mapping.keys()])
 
   hit_pdb_code = "custom_template"
