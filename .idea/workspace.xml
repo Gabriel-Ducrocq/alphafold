@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="42bd1659-7ad0-4ef2-aeb5-ee5340acb692" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/alphafold/data/templates.py" beforeDir="false" afterPath="$PROJECT_DIR$/alphafold/data/templates.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

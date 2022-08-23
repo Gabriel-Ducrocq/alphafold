@@ -953,7 +953,10 @@ def _process_custom_template(
 
   ## CHECK ALSO THAT THE extract_atom_positions ACTUALLY HAS ONLY THE EXISTING RESIDUES IN THE ARRAY AND THAT IS WHY WE
   ## SHOULD START i to 0 an proceed to 1 etc...
-  mapping = {id-1:i for i,id in enumerate(list_of_res_per_chain)}
+
+  ## ALSO CHECK WHAT DOES _build_query_to_hit_index_mapping DO: START THE INDEXES AT 0 OR NOR ?
+  ## Deliberately removing -1 to check for the behavior of the code
+  mapping = {id:i for i,id in enumerate(list_of_res_per_chain)}
   print("Mapping:", mapping)
   print("\n\n\n")
   print(query_sequence)
