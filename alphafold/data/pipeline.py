@@ -258,9 +258,9 @@ class DataPipelineCustomTemplate(DataPipeline):
                  template_searcher: TemplateSearcher,
                  template_featurizer: templates.CustomTemplateFeaturizer,
                  use_small_bfd: bool,
-                 mgnify_max_hits: int = 501,
-                 uniref_max_hits: int = 10000,
-                 use_precomputed_msas: bool = False):
+                 mgnify_max_hits: int = 0,
+                 uniref_max_hits: int = 0,
+                 use_precomputed_msas: bool = False, use_hhblits = False):
 
         super().__init__(jackhmmer_binary_path,
                hhblits_binary_path,
@@ -275,6 +275,8 @@ class DataPipelineCustomTemplate(DataPipeline):
                mgnify_max_hits,
                uniref_max_hits,
                use_precomputed_msas)
+
+        self.use_hhblits = use_hhblits
 
     def process(self, input_fasta_path: str, msa_output_dir: str) -> FeatureDict:
         """Runs alignment tools on the input sequence and creates features
@@ -311,7 +313,6 @@ class DataPipelineCustomTemplate(DataPipeline):
 
         #pdb_template_hits = self.template_searcher.get_template_hits(
         #    output_string=pdb_templates_result, input_sequence=input_sequence)
-
         if self._use_small_bfd:
             bfd_out_path = os.path.join(msa_output_dir, 'small_bfd_hits.sto')
             jackhmmer_small_bfd_result = run_msa_tool(
@@ -321,7 +322,7 @@ class DataPipelineCustomTemplate(DataPipeline):
                 msa_format='sto',
                 use_precomputed_msas=self.use_precomputed_msas)
             bfd_msa = parsers.parse_stockholm(jackhmmer_small_bfd_result['sto'])
-        else:
+        elif self.use_hhblits:
             bfd_out_path = os.path.join(msa_output_dir, 'bfd_uniclust_hits.a3m')
             hhblits_bfd_uniclust_result = run_msa_tool(
                 msa_runner=self.hhblits_bfd_uniclust_runner,
@@ -339,10 +340,17 @@ class DataPipelineCustomTemplate(DataPipeline):
             description=input_description,
             num_res=num_res)
 
-        msa_features = make_msa_features((uniref90_msa, bfd_msa, mgnify_msa))
+        if self.use_hhblits:
+            msa_features = make_msa_features((uniref90_msa, bfd_msa, mgnify_msa))
+        else:
+            msa_features = make_msa_features((uniref90_msa, mgnify_msa))
 
         logging.info('Uniref90 MSA size: %d sequences.', len(uniref90_msa))
-        logging.info('BFD MSA size: %d sequences.', len(bfd_msa))
+        if self.use_hhblits:
+            logging.info('BFD MSA size: %d sequences.', len(bfd_msa))
+        else:
+            logging.info('BFD MSA size: %d sequences. NO HHBLITS USED !!', len(bfd_msa))
+
         logging.info('MGnify MSA size: %d sequences.', len(mgnify_msa))
         logging.info('Final (deduplicated) MSA size: %d sequences.',
                      msa_features['num_alignments'][0])

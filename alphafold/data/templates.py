@@ -955,8 +955,7 @@ def _process_custom_template(
   ## SHOULD START i to 0 an proceed to 1 etc...
 
   ## ALSO CHECK WHAT DOES _build_query_to_hit_index_mapping DO: START THE INDEXES AT 0 OR NOR ?
-  ## Deliberately removing -1 to check for the behavior of the code
-  mapping = {id:i for i,id in enumerate(list_of_res_per_chain)}
+  mapping = {id-1:i for i,id in enumerate(list_of_res_per_chain)}
   print("Mapping:", mapping)
   print("\n\n\n")
   print(query_sequence)
