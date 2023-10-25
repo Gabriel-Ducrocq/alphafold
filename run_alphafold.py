@@ -54,7 +54,7 @@ flags.DEFINE_string('data_dir', None, 'Path to directory of supporting data.')
 flags.DEFINE_string('output_dir', None, 'Path to a directory that will '
                     'store the results.')
 
-flags.DEFINE_boolean('return_representations', False, 'Weather to return representations or not')
+flags.DEFINE_boolean('return_representation', False, 'Weather to return representations or not')
 flags.DEFINE_string('jackhmmer_binary_path', shutil.which('jackhmmer'),
                     'Path to the JackHMMER executable.')
 flags.DEFINE_string('hhblits_binary_path', shutil.which('hhblits'),
@@ -377,7 +377,7 @@ def main(argv):
       model_config.data.eval.num_ensemble = num_ensemble
     model_params = data.get_model_haiku_params(
         model_name=model_name, data_dir=FLAGS.data_dir)
-    model_runner = model.RunModel(model_config, model_params, return_representations=FLAGS.return_representations)
+    model_runner = model.RunModel(model_config, model_params, return_representation=FLAGS.return_representation)
     for i in range(num_predictions_per_model):
       model_runners[f'{model_name}_pred_{i}'] = model_runner
 
